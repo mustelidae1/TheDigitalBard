@@ -14,12 +14,6 @@ h1 {
   font-family: 'Cinzel', serif;
 }
 
-.regText {
-  font-family: 'Arapey', serif;
-  font-size: 20px;
-  display: inline;
-}
-
 form {
   margin: 0px;
 }
@@ -29,12 +23,23 @@ a {
   text-decoration: inherit;
 }
 
+.regText {
+  font-family: 'Arapey', serif;
+  font-size: 20px;
+  display: inline;
+}
+
 .box {
   padding: 10px;
   margin: auto;
   margin-top: 10px;
   width: 75%;
   background-color: #fffbc2;
+  transition: 0.5s ease;
+}
+
+.box:hover {
+  background-color: #fff991;
 }
 
 .timestamp {
@@ -42,17 +47,33 @@ a {
 }
 
 .storyTitle {
-  font-size: 20px; 
+  font-size: 20px;
 }
 
-.box:hover {
-  background-color: #fff991;
-
-}
-
-.textBox {
+.button {
   font-family: 'Arapey', serif;
   font-size: 20px;
+  display: inline;
+  color: white;
+  background-color: #571a1a;
+  border-radius: 5px;
+  padding: 7px;
+  border-style: none;
+  transition: 0.5s ease;
+}
+
+.button:hover {
+  background-color: #f25c5c;
+}
+
+input[type="text" i], input[type="password" i] {
+   font-family: 'Arapey', serif;
+   font-size: 20px;
+   margin-bottom: 10px;
+   padding: 5px;
+   background-color: #fffbc2;
+   border-style: none;
+   border-radius: 5px;
 }
 
 #radioBSection {
@@ -64,13 +85,13 @@ a {
   margin: 0px 10px;
 }
 
+input[type="radio" i]:checked {
+ /* do something with this */
+}
 
-.textBox {
-   margin-bottom: 10px;
-   padding: 5px;
-   background-color: #fffbc2;
-   border-style: none;
-   border-radius: 5px;
+.parchmentSection {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 #main {
@@ -80,30 +101,19 @@ a {
 
 #top {
    background-image: url("parchment-top.png");
-   background-repeat: no-repeat;
-   background-size: 100% 100%;
    height: 200px;
    margin-top: 20px;
 }
 
 #mid {
    background-image: url("parchment-mid.png");
-   background-repeat: no-repeat;
-   background-size: 100% 100%;
    min-height: 300px;
-   /*height: 500px; */
 }
 
 #bottom {
    background-image: url("parchment-base.png");
-   background-repeat: no-repeat;
-   background-size: 100% 100%;
    height: 150px;
    margin-bottom: 20px;
-}
-
-#navbar {
-  /*height: 100px;*/
 }
 
 #navbuttons {
@@ -111,42 +121,11 @@ a {
 }
 
 #navbuttons > ul > li {
-  /*display: inline;*/
   margin: 15px;
-  color: white;
-  text-align: center;
   list-style-type: none;
-  background-color: #571a1a;
+  text-align: center;
   padding: 7px;
-  border-radius: 5px;
-  transition: 0.5s ease;
-}
-
-.fadeable {
-  transition: 0.5s ease;
-}
-
-#navbuttons > ul > li:hover {
-  background-color: #f25c5c;
-}
-
-input[type="submit" i] {
-  font-family: 'Arapey', serif;
-  font-size: 20px;
-  color: white;
-  background-color: #571a1a;
-  border-radius: 5px;
-  padding: 7px;
-  border-style: none;
-  transition: 0.5s ease;
-}
-
-input[type="submit" i]:hover {
-  background-color: #f25c5c;
-}
-
-input[type="radio" i]:checked {
- /* do something with this */
+  display: block;
 }
 
 #logo {
