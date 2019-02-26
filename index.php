@@ -1,5 +1,6 @@
 <html>
 <head>
+   <title>The Digital Bard</title> 
    <link rel="stylesheet" href="style.css">
    <link href="https://fonts.googleapis.com/css?family=Cinzel|Arapey" rel="stylesheet">
    <link rel="icon" type="image/png" href="favicon.png">
