@@ -12,19 +12,19 @@
   ?>
 <div id="mid" class="parchmentSection">
 <div id="midContent">
-   <form method="post" action="loginHandler.php">
-      <h1>Save Stories</h1>
+   <form method="post" action="createAccountHandler.php">
+      <h1>Create Account</h1>
       <div><div class="regText">Username: </div><input type="text" name="username"></div>
       <div><div class="regText">Password: </div><input type="password" name="password"></div>
+      <div><div class="regText">Email: </div><input type="text" name = "email"></div>
       <?php
         session_start();
         if (isset($_SESSION['message'])) {
           echo "<div id='message'>" . $_SESSION['message'] .  "</div>";
-          unset($_SESSION['message']);
+          unset($_SESSION['message']); 
         }
       ?>
-      <input class="button" type="submit" value="Log In">
-      <input class="button" type="submit" name="createAccount" value="Create Account">
+      <input class="button" type="submit" value="Create">
    </form>
  </div>
 </div>
