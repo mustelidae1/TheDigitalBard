@@ -16,13 +16,12 @@
       session_start();
       require_once("Dao.php");
         $dao = new Dao();
-        $username = $_SESSION['username'];
         $poems = $dao->getAllPoems();
         foreach ($poems as $poem) {
           echo("<a href=\"poemDetail.php?id={$poem["poem_id"]}\"><div class=\"box fadeable\"><div class=\"storyTitle\">{$poem['title']}</div></div></a>");
         }
 
-        $_SESSION['gallery'] = true; 
+        $_SESSION['gallery'] = true;
       ?>
  </div>
 </div>
