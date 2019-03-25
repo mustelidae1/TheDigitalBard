@@ -1,30 +1,42 @@
 <?php
    session_start();
 
-   $username = $_POST['username']; // TODO: sanitize this
-   $password = $_POST['password'];
-   $email = $_POST['email'];
+   $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+   $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+   $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
 
    require_once 'Dao.php';
    $dao = new Dao();
-   $dao->createUser($username, $password, $email);
 
-   echo ("User created.");
-   $users = $dao->getUsers();
-   foreach ($users as $user) {
-     echo $user['username'];
-   }
-
+   // CHECK: Preexisting username
    if($dao->userExists($username)) {
      $_SESSION['message'] = "User already exists.";
      header("location: createAccount.php");
      die();
+
+  // CHECK: data not entered
+  } else if (strlen($username) == 0 || strlen($password) == 0 || strlen($email) == 0) {
+    $_SESSION['message'] = "Please fill everything in.";
+    header("location: createAccount.php");
+    die();
+
+  // CHECK: Username length
    } else if(strlen($username) < 5) {
-     // TODO: make sure username does not already exist
      $_SESSION['message'] = "Your username was too short.";
      header("location: createAccount.php");
      die();
+
+  // CHECK: Email format
+  } else if(!preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/", $email)){
+      $_SESSION['message'] = "Incorrect email format.";
+      header("location: createAccount.php");
+      die();
+
+   // CHECK: Password format TODO
+
+  // We passed all the checks
    } else {
+     $dao->createUser($username, $password, $email);
      header("location: account.php");
      die();
    }

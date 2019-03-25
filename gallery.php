@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>The Digital Bard</title> 
+  <title>The Digital Bard</title>
    <link rel="stylesheet" href="style.css">
    <link href="https://fonts.googleapis.com/css?family=Cinzel|Arapey" rel="stylesheet">
    <link rel="icon" type="image/png" href="favicon.png">
@@ -12,9 +12,18 @@
 <div id="mid" class="parchmentSection">
 <div id="midContent">
       <h1>Gallery</h1>
-      <a href="storyDetail.php"><div class="box fadeable"><div class="storyTitle">Story 1</div> <div class="timestamp">January 7 2019</div></div></a>
-      <a href="storyDetail.php"><div class="box fadeable"><div class="storyTitle">Story 2 </div><div class="timestamp">December 25 2018</div></div></a>
-      <a href="storyDetail.php"><div class="box fadeable"><div class="storyTitle">Story 3 </div><div class="timestamp">December 5 2018</div></div></a>
+      <?php
+      session_start();
+      require_once("Dao.php");
+        $dao = new Dao();
+        $username = $_SESSION['username'];
+        $poems = $dao->getAllPoems();
+        foreach ($poems as $poem) {
+          echo("<a href=\"poemDetail.php?id={$poem["poem_id"]}\"><div class=\"box fadeable\"><div class=\"storyTitle\">{$poem['title']}</div></div></a>");
+        }
+
+        $_SESSION['gallery'] = true; 
+      ?>
  </div>
 </div>
 <?php

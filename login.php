@@ -13,7 +13,7 @@
 <div id="mid" class="parchmentSection">
 <div id="midContent">
    <form method="post" action="loginHandler.php">
-      <h1>Save Stories</h1>
+      <h1>Save Poems</h1>
       <div><div class="regText">Username: </div><input type="text" name="username"></div>
       <div><div class="regText">Password: </div><input type="password" name="password"></div>
       <?php
