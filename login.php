@@ -17,7 +17,6 @@
       <div><div class="regText">Username: </div><input type="text" name="username"></div>
       <div><div class="regText">Password: </div><input type="password" name="password"></div>
       <?php
-        session_start();
         if (isset($_SESSION['message'])) {
           echo "<div id='message'>" . $_SESSION['message'] .  "</div>";
           unset($_SESSION['message']);

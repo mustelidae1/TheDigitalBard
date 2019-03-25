@@ -13,11 +13,10 @@
 <div id="midContent">
    <form method="post" action="savePoemHandler.php">
      <?php
-     session_start();
      if (isset($_SESSION['poem'])) {
        echo "<h1>" . $_SESSION['title'] . "</h1>";
        echo "<div id='poem'>" . $_SESSION['poem'] .  "</div>";
-       //unset($_SESSION['poem']); -- actually want to keep for saving 
+       //unset($_SESSION['poem']); -- actually want to keep for saving
      }
      ?>
       <input class="button" type="submit" value="Save">

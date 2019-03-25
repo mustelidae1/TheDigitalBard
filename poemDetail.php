@@ -13,7 +13,6 @@
 <div id="mid" class="parchmentSection">
 <div id="midContent">
   <?php
-    session_start();
     if (isset($_GET['id'])) {
       $id = filter_var($_GET['id'], FILTER_SANITIZE_STRING);
       require_once("Dao.php");
@@ -24,7 +23,7 @@
     }
 
     if (isset($_SESSION['gallery'])) {
-      unset($_SESSION['gallery']); 
+      unset($_SESSION['gallery']);
       echo("<a href=\"gallery.php\"><div class=\"button\">Back</div></a>");
     } else {
       echo("<a href=\"account.php\"><div class=\"button\">Back</div></a>");

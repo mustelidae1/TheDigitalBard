@@ -13,7 +13,6 @@
 <div id="midContent">
       <h1>Gallery</h1>
       <?php
-      session_start();
       require_once("Dao.php");
         $dao = new Dao();
         $poems = $dao->getAllPoems();

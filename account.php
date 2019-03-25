@@ -13,7 +13,6 @@
 <div id="mid" class="parchmentSection">
 <div id="midContent">
       <?php
-      session_start();
       echo("<h1>Welcome, {$_SESSION['username']}</h1>");
       require_once("Dao.php");
         $dao = new Dao();
