@@ -12,7 +12,7 @@ echo '
     if (!isset($_SESSION['username'])) {
       echo('<li class="button"><a href="login.php"><div class="regText">Log In</div></a></li> ');
     } else {
-      echo('<li class="button"><a href="logoutHandler.php"><div class="regText">Log Out</div></a></li>');
+      echo('<li class="button"><a href="account.php"><div class="regText">My Poems</div></a></li>');
     }
 
    echo '

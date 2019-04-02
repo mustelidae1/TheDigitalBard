@@ -37,7 +37,7 @@ class Dao {
      $result = $conn->query("SELECT * FROM dbuser WHERE username LIKE '$username'");
      foreach ($result as $curUser) {
         $correctPassword = $curUser['password'];
-      }
+     }
      return $correctPassword;
    }
 
@@ -94,7 +94,7 @@ class Dao {
      foreach ($result as $curPoem) {
        $poem = $curPoem;
      }
-     return $poem; 
+     return $poem;
    }
 
 }

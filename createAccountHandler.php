@@ -5,6 +5,8 @@
    $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
    $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
 
+   $_SESSION['form_input'] = $_POST;  
+
    require_once 'Dao.php';
    $dao = new Dao();
 
@@ -37,6 +39,11 @@
   // We passed all the checks
    } else {
      $dao->createUser($username, $password, $email);
+     $_SESSION['username'] = $username;
+     if(isset($_SESSION['savingPoem'])) {
+       header("location: savePoemHandler.php");
+       die();
+     }
      header("location: account.php");
      die();
    }

@@ -13,11 +13,11 @@
 <div id="mid" class="parchmentSection">
 <div id="midContent">
       <?php
-      echo("<h1>Welcome, {$_SESSION['username']}</h1>");
+      echo("<h1>Welcome, {$_SESSION['username']}</h1><a href=\"logoutHandler.php\">Log Out</a>");
       require_once("Dao.php");
         $dao = new Dao();
         $username = $_SESSION['username'];
-        $poems = $dao->getPoemsByUser($username);
+        $poems = $dao->getPoemsByUser($username); //TODO: print poems in reverse order, newest first
         foreach ($poems as $poem) {
           echo("<a href=\"poemDetail.php?id={$poem["poem_id"]}\"><div class=\"box fadeable\"><div class=\"storyTitle\">{$poem['title']}</div></div></a>");
         }

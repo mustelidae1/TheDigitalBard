@@ -14,15 +14,15 @@
 <div id="midContent">
    <form method="post" action="createAccountHandler.php">
       <h1>Create Account</h1>
-      <div><div class="regText">Username: </div><input type="text" name="username"></div>
+      <div><div class="regText">Username: </div><input value="<?php echo isset($_SESSION['form_input']['username']) ? $_SESSION['form_input']['username'] : ""; ?>" type="text" name="username"></div>
       <div><div class="regText">Password: </div><input type="password" name="password"></div>
-      <div><div class="regText">Email: </div><input type="text" name = "email"></div>
+      <div><div class="regText">Email: </div><input value="<?php echo isset($_SESSION['form_input']['email']) ? $_SESSION['form_input']['email'] : ""; ?>"type="text" name = "email"></div>
       <?php
-        session_start();
         if (isset($_SESSION['message'])) {
           echo "<div id='message'>" . $_SESSION['message'] .  "</div>";
-          unset($_SESSION['message']); 
+          unset($_SESSION['message']);
         }
+        unset($_SESSION['form_input']); 
       ?>
       <input class="button" type="submit" value="Create">
    </form>
