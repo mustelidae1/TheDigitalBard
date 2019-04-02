@@ -5,7 +5,7 @@
      die();
    }
 
-    if(issset($_POST['username'])) {
+    if(isset($_POST['username'])) {
        $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     }
 

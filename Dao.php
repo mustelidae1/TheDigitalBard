@@ -39,6 +39,15 @@ class Dao {
         $correctPassword = $curUser['password'];
      }
      return $correctPassword;
+
+     /*$selectQuery = "SELECT * FROM dbuser WHERE username LIKE ':username'";
+     $q = $conn->prepare($selectQuery);
+     $q->bindParam(":username", $username);
+     $result = $q->execute();
+     foreach ($result as $curUser) {
+        $correctPassword = $curUser['password'];
+     }
+     return $correctPassword;*/
    }
 
    public function getUserID($username) {
