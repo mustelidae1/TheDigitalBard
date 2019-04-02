@@ -34,20 +34,21 @@ class Dao {
 
    public function getPassword($username) { // TODO: sanitize this statement
      $conn = $this->getConnection();
-     $result = $conn->query("SELECT * FROM dbuser WHERE username LIKE '$username'");
-     foreach ($result as $curUser) {
-        $correctPassword = $curUser['password'];
-     }
-     return $correctPassword;
-
-     /*$selectQuery = "SELECT * FROM dbuser WHERE username LIKE ':username'";
-     $q = $conn->prepare($selectQuery);
-     $q->bindParam(":username", $username);
-     $result = $q->execute();
+     /*$result = $conn->query("SELECT * FROM dbuser WHERE username LIKE '$username'");
      foreach ($result as $curUser) {
         $correctPassword = $curUser['password'];
      }
      return $correctPassword;*/
+
+     $selectQuery = "SELECT * FROM dbuser WHERE username = :username";
+     $q = $conn->prepare($selectQuery);
+     $q->bindParam(":username", $username);
+     $q->execute();
+     $result = $q->fetchAll();
+     foreach ($result as $curUser) {
+        $correctPassword = $curUser['password'];
+     }
+     return $correctPassword;
    }
 
    public function getUserID($username) {
