@@ -35,7 +35,6 @@
 
     // TODO: add getRhyming function that defaults to close rhymes if it can't find one
     // TODO: Stuff still times out -- see History at 10
-    // TODO: make this get noun
     public function getWord($query) {
       // Only keep first word if there are multiple
       $pieces = explode(" ", $query);
@@ -167,6 +166,7 @@
       return $result;
     }
 
+    // TODO: Use an api for this instead
     public function verbPresentTense($verb) {
       // https://rapidapi.com/ceneezer/api/conjugate?utm_source=mashape&utm_medium=301
       // TODO

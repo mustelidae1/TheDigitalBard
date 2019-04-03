@@ -1,5 +1,9 @@
 <?php
    session_start();
+
+   $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+   $_SESSION['form_input'] = $_POST;
+
    if(isset($_POST['createAccount'])) {
      header("location: createAccount.php");
      die();

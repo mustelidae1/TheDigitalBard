@@ -18,11 +18,13 @@
       <div><div class="regText">Password: </div><input type="password" name="password"></div>
       <div><div class="regText">Email: </div><input value="<?php echo isset($_SESSION['form_input']['email']) ? $_SESSION['form_input']['email'] : ""; ?>"type="text" name = "email"></div>
       <?php
-        if (isset($_SESSION['message'])) {
-          echo "<div id='message'>" . $_SESSION['message'] .  "</div>";
-          unset($_SESSION['message']);
+        if (isset($_SESSION['messages'])) {
+          foreach ($_SESSION['messages'] as $message) {
+              echo "<div id='message'>" . $message .  "</div>";
+          }
+          unset($_SESSION['messages']);
         }
-        unset($_SESSION['form_input']); 
+        unset($_SESSION['form_input']);
       ?>
       <input class="button" type="submit" value="Create">
    </form>

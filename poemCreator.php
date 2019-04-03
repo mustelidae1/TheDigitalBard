@@ -32,7 +32,7 @@
    . "<p>and {$sings} the {$tune} without the {$words}</p>"
    . "<p>and never {$stops} - {$atall}</p>";
 
-   //print($poem);
+   print($poem);
 
    $_SESSION['title'] = $category;
    $_SESSION['poem'] = $poem;

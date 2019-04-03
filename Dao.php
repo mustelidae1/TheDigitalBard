@@ -32,37 +32,33 @@ class Dao {
      return $conn->query("SELECT * FROM dbuser");
    }
 
-   public function getPassword($username) { // TODO: sanitize this statement
+   public function getPassword($username) { 
      $conn = $this->getConnection();
-     /*$result = $conn->query("SELECT * FROM dbuser WHERE username LIKE '$username'");
-     foreach ($result as $curUser) {
-        $correctPassword = $curUser['password'];
-     }
-     return $correctPassword;*/
+     $selectQuery = "SELECT * FROM dbuser WHERE username = :username";
+     $q = $conn->prepare($selectQuery);
+     $q->bindParam(":username", $username);
+     $q->execute();
+     $result = $q->fetch();
+     return $result['password'];
+   }
 
+   public function getUserID($username) {
+     $conn = $this->getConnection();
+     $selectQuery = "SELECT * FROM dbuser WHERE username = :username";
+     $q = $conn->prepare($selectQuery);
+     $q->bindParam(":username", $username);
+     $q->execute();
+     $result = $q->fetch();
+     return $result['user_id'];
+   }
+
+   public function userExists($username) {
+     $conn = $this->getConnection();
      $selectQuery = "SELECT * FROM dbuser WHERE username = :username";
      $q = $conn->prepare($selectQuery);
      $q->bindParam(":username", $username);
      $q->execute();
      $result = $q->fetchAll();
-     foreach ($result as $curUser) {
-        $correctPassword = $curUser['password'];
-     }
-     return $correctPassword;
-   }
-
-   public function getUserID($username) {
-     $conn = $this->getConnection();
-     $result = $conn->query("SELECT * FROM dbuser WHERE username LIKE '$username'");
-     foreach ($result as $curUser) {
-        $id = $curUser['user_id'];
-      }
-     return $id;
-   }
-
-   public function userExists($username) {
-     $conn = $this->getConnection();
-     $result = $conn->query("SELECT * FROM dbuser WHERE username LIKE'$username'");
      $userExists = false;
      foreach ($result as $curUser) {
        $userExists = true;
@@ -88,7 +84,11 @@ class Dao {
    public function getPoemsByUser($username) {
      $conn = $this->getConnection();
      $userID = $this->getUserID($username);
-     $result = $conn->query("SELECT * FROM savedPoem WHERE (user_id = $userID)");
+     $selectQuery = "SELECT * FROM savedPoem WHERE (user_id = :userId)";
+     $q = $conn->prepare($selectQuery);
+     $q->bindParam(":userId", $userID);
+     $q->execute();
+     $result = $q->fetchAll();
      return $result;
    }
 
@@ -100,11 +100,12 @@ class Dao {
 
    public function getPoemByID($id) {
      $conn = $this->getConnection();
-     $result = $conn->query("SELECT * FROM savedPOEM WHERE (poem_id = $id)");
-     foreach ($result as $curPoem) {
-       $poem = $curPoem;
-     }
-     return $poem;
+     $selectQuery = "SELECT * FROM savedPOEM WHERE (poem_id = :id)";
+     $q = $conn->prepare($selectQuery);
+     $q->bindParam(":id", $id);
+     $q->execute();
+     $result = $q->fetch();
+     return $result;
    }
 
 }
