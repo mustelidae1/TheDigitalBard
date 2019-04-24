@@ -10,7 +10,7 @@
      die();
    }
 
-   // https://www.perfecttense.com/docs/#introduction
+   // https://www.perfecttense.com/docs/#introduction  // not free
    // possible grammar apis
    // https://www.scribens.com/#
 

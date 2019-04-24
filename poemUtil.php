@@ -1,4 +1,5 @@
 <?php
+require_once 'vendor/autoload.php';
   class poemUtil {
 
     // TODO: the other possible way to handle words not found is if we realize
@@ -183,6 +184,16 @@
       } else {
         return ($verb . "s");
       }
+  /*    Unirest\Request::verifyPeer(false);
+      $response = Unirest\Request::get("https://ceneezer-conjugate-v1.p.rapidapi.com/?mode=conjugate&verb=compiled",
+    array(
+      "X-RapidAPI-Host" => "ceneezer-conjugate-v1.p.rapidapi.com",
+      "X-RapidAPI-Key" => "22ce90356amsh34baa2ee12e70c4p1fb982jsn0714e800b3a6"
+    )
+  );*/
+
+  print $response;
+
     }
 
     public function addUsed($word) {

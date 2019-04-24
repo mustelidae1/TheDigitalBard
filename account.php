@@ -13,6 +13,10 @@
 <div id="mid" class="parchmentSection">
 <div id="midContent">
       <?php
+      if (!isset($_SESSION['username'])) {
+        header("location: login.php");
+        die();
+      }
       echo("<h1>Welcome, {$_SESSION['username']}</h1><a href=\"logoutHandler.php\">Log Out</a>");
       require_once("Dao.php");
         $dao = new Dao();

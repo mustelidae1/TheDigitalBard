@@ -50,6 +50,18 @@ a {
   font-size: 20px;
 }
 
+.currentPageButton {
+  font-family: 'Arapey', serif;
+  font-size: 20px;
+  display: inline;
+  color: white;
+  background-color: #f25c5c;
+  border-radius: 5px;
+  padding: 7px;
+  border-style: none;
+  transition: 0.5s ease;
+}
+
 .button {
   font-family: 'Arapey', serif;
   font-size: 20px;
@@ -63,7 +75,7 @@ a {
 }
 
 .button:hover {
-  background-color: #f25c5c;
+  background-color: #ba5050;
 }
 
 input[type="text" i], input[type="password" i] {
@@ -74,19 +86,6 @@ input[type="text" i], input[type="password" i] {
    background-color: #fffbc2;
    border-style: none;
    border-radius: 5px;
-}
-
-#radioBSection {
-  margin-bottom: 40px;
-}
-
-.radioB {
-  display: inline;
-  margin: 0px 10px;
-}
-
-input[type="radio" i]:checked {
- /* do something with this */
 }
 
 .parchmentSection {

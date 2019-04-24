@@ -10,13 +10,13 @@ echo '
     <ul>';
 
     if (!isset($_SESSION['username'])) {
-      echo('<li class="button"><a href="login.php"><div class="regText">Log In</div></a></li> ');
+      echo('<li class="button" id="loginbutton"><a href="login.php"><div class="regText">Log In</div></a></li> ');
     } else {
-      echo('<li class="button"><a href="account.php"><div class="regText">My Poems</div></a></li>');
+      echo('<li class="button" id="loginbutton"><a href="account.php"><div class="regText">My Poems</div></a></li>');
     }
 
    echo '
-      <li class="button"> <a href="gallery.php"><div class="regText">Gallery</div></a></li>
+      <li class="button" id="gallerybutton"> <a href="gallery.php"><div class="regText">Gallery</div></a></li>
     </ul>
    </div>
 </div>

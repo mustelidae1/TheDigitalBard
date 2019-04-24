@@ -15,6 +15,7 @@
 
     if(isset($_POST['password'])) {
        $enteredPassword = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+       $enteredPassword = md5($enteredPassword + "saltysaltysalt");
     }
 
    require_once 'Dao.php';

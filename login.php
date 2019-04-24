@@ -14,8 +14,8 @@
 <div id="midContent">
    <form method="post" action="loginHandler.php">
       <h1>Save Poems</h1>
-      <div><div class="regText">Username: </div><input value="<?php echo isset($_SESSION['form_input']['username']) ? $_SESSION['form_input']['username'] : ""; ?>" type="text" name="username"></div>
-      <div><div class="regText">Password: </div><input type="password" name="password"></div>
+      <div><div class="regText"><label for="username">Username: </label></div><input value="<?php echo isset($_SESSION['form_input']['username']) ? $_SESSION['form_input']['username'] : ""; ?>" type="text" name="username" id="username"></div>
+      <div><div class="regText"><label for="password">Password: </label></div><input type="password" name="password" id="password"></div>
       <?php
         if (isset($_SESSION['message'])) {
           echo "<div id='message'>" . $_SESSION['message'] .  "</div>";
@@ -33,4 +33,5 @@
 ?>
 </div>
 </body>
+<script src="fadeOut.js"></script>
 </html>

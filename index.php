@@ -12,8 +12,8 @@
 <div id="mid" class="parchmentSection">
 <div id="midContent">
    <form method="post" action="poemCreator.php">
-      <h1>Enter a Topic</h1>
-      <div><input type="text" name="topic"></div>
+      <h1><label for="topic">Enter a Topic</label></h1>
+      <div><input type="text" name="topic" id="topic"></div>
       <input class="button" type="submit" value="Go!">
    </form>
 </div>

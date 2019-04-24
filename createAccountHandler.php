@@ -3,9 +3,9 @@
 
    $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-   $username = $_POST['username'];
-   $password = $_POST['password'];
-   $email = $_POST['email'];
+   $username = htmlentities($_POST['username']);
+   $password = htmlentities($_POST['password']);
+   $email = htmlentities($_POST['email']);
 
    $_SESSION['form_input'] = $_POST;
 
@@ -13,6 +13,7 @@
    $dao = new Dao();
 
    $messages = array();
+
 
    // CHECK: Preexisting username
    if($dao->userExists($username)) {
@@ -41,6 +42,7 @@
 
    // We passed all the checks
    if (count($messages) == 0) {
+     $password = md5($password + "saltysaltysalt");
      $dao->createUser($username, $password, $email);
      $_SESSION['username'] = $username;
      if(isset($_SESSION['savingPoem'])) {
