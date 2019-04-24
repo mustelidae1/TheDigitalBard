@@ -16,6 +16,7 @@
 
    // Sentence generator: https://linguatools.org/language-apis/sentence-generating-api/
 
+   // Hope is the thing with Feathers
    $feathers = $poemUtil->getNoun("https://api.datamuse.com/words?rel_gen={$topic}&md=p"); // was rel_trg
    $category = $poemUtil->getNoun("https://api.datamuse.com/words?rel_spc={$feathers}&md=p&topics={$topic}"); // maybe don't get this one randomly?
    $perches = $poemUtil->getVerb("https://api.datamuse.com/words?rel_trg={$category}&md=p");
@@ -33,6 +34,24 @@
    . "<p>and never {$stops} - {$atall}</p>";
 
    print($poem);
+
+   // Tyger
+   /*$burning =
+   $poem = "<p>{$topic} {$topic}, burning bright,</p>"
+           "<p>In the forests of the night;</p>" .
+           "<p>What immortal hand or eye,</p>" .
+           "<p>Could frame thy fearful symmetry?</p>"*/
+
+   /*$poem = "<p>Understand, I’ll slip quietly</p>" .
+           "<p>away from the noisy crowd</p>" .
+          "<p>when I see the pale</p>" .
+          "<p>stars rising, blooming, over the oaks.</p>"
+
+          "<p>I’ll pursue solitary pathways</p>" .
+          "<p>through the pale twilit meadows,</p>" .
+          "<p>with only this one dream:</p>" .
+
+          "<p>You come too.</p>"*/
 
    $_SESSION['title'] = $category;
    $_SESSION['poem'] = $poem;

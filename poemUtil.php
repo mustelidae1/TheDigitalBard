@@ -95,7 +95,9 @@ require_once 'vendor/autoload.php';
 
       $nouns = array();
       foreach ($json as $word) {
-        if (in_array("n", $word["tags"])) {  // TODO: sometimes tags array is empty...why?
+        if ($word["tags"] == null) {
+          return $this->getWord("https://api.datamuse.com/words?rel_trg={$topic}&md=p");
+        } else if (in_array("n", $word["tags"])) {
            $nouns[] = $word;
         }
       }
@@ -141,7 +143,9 @@ require_once 'vendor/autoload.php';
       foreach ($json as $word) {
         //print_r($json);
         //echo("<br><br>");
-        if (in_array("v", $word["tags"]) || $searchCount == count($json)) {
+        if ($word["tags"] == null) {
+           return "is";
+        } else if (in_array("v", $word["tags"]) || $searchCount == count($json)) {
            $verbs[] = $word;
         }
       }
