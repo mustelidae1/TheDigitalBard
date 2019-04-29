@@ -18,9 +18,9 @@
 
    // Hope is the thing with Feathers
    $feathers = $poemUtil->getNoun("https://api.datamuse.com/words?rel_gen={$topic}&md=p"); // was rel_trg
-   $category = $poemUtil->getNoun("https://api.datamuse.com/words?rel_spc={$feathers}&md=p&topics={$topic}"); // maybe don't get this one randomly?
+   $category = $poemUtil->getFirstWord("https://api.datamuse.com/words?rel_spc={$feathers}&md=p&topics={$topic}"); // maybe don't get this one randomly?
    $perches = $poemUtil->getVerb("https://api.datamuse.com/words?rel_trg={$category}&md=p");
-   $soul = $poemUtil->getNoun("https://api.datamuse.com/words?ml=place&rel_trg={$topic}&md=p");
+   $soul = $poemUtil->getNoun("https://api.datamuse.com/words?topics=place&ml={$topic}&md=p");
    $sings = $poemUtil->getVerb("https://api.datamuse.com/words?rel_trg={$category}&md=p");
    $tune = $poemUtil->getNoun("https://api.datamuse.com/words?ml={$sings}&md=p&topics={$topic}");
    $words = $poemUtil->getNoun("https://api.datamuse.com/words?rel_trg={$tune}&md=p&topics={$topic}");
@@ -34,6 +34,12 @@
    . "<p>and never {$stops} - {$atall}</p>";
 
    print($poem);
+
+   // Rilke
+  /* $poem = "<p>My {$eyes} already {$touch} the sunny hill.</p>" .
+           "<p>going far beyond the road I have begun,</p>" .
+           "<p>So we are grasped by what we cannot grasp;</p>" .
+           "<p>it has an inner light, even from a distance-<p>" */
 
    // Tyger
    /*$burning =
@@ -52,6 +58,7 @@
           "<p>with only this one dream:</p>" .
 
           "<p>You come too.</p>"*/
+
 
    $_SESSION['title'] = $category;
    $_SESSION['poem'] = $poem;

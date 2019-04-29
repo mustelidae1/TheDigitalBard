@@ -16,8 +16,13 @@
       require_once("Dao.php");
         $dao = new Dao();
         $poems = $dao->getAllPoems();
+        $poemsArray = Array();
         foreach ($poems as $poem) {
-          echo("<a href=\"poemDetail.php?id={$poem["poem_id"]}\"><div class=\"box fadeable\"><div class=\"storyTitle\">{$poem['title']}</div></div></a>");
+          $poemsArray[] = $poem;
+        }
+        $poemsArrayReversed = array_reverse($poemsArray);
+        foreach ($poemsArrayReversed as $poem) {
+            echo("<a href=\"poemDetail.php?id={$poem["poem_id"]}\"><div class=\"box fadeable\"><div class=\"storyTitle\">{$poem['title']}</div></div></a>");
         }
 
         $_SESSION['gallery'] = true;

@@ -24,7 +24,7 @@ require_once 'vendor/autoload.php';
         //TODO: send user a message if their topic is not valid
     public function validTopic() {
       global $topic;
-      $resp = file_get_contents("https://api.datamuse.com/words?rel_trg={$topic}&md=p");
+      $resp = file_get_contents("https://api.datamuse.com/words?ml={$topic}&md=p");
       $json = json_decode($resp, true);
       $elementCount = count($json);
       if ($elementCount >= 3) {
@@ -36,74 +36,37 @@ require_once 'vendor/autoload.php';
 
     // TODO: add getRhyming function that defaults to close rhymes if it can't find one
     // TODO: Stuff still times out -- see History at 10
-    public function getWord($query) {
-      // Only keep first word if there are multiple
-      $pieces = explode(" ", $query);
-      $query = $pieces[0];
+    public function getFirstWord($query) {
+      $query .= "&md=p";
 
       $resp = file_get_contents($query);
       $json = json_decode($resp, true);
       if (count($json) == 0) {
         global $topic;
-        return $this->getWord("https://api.datamuse.com/words?rel_trg={$topic}&md=p");
+        //print("Noun JSON count 0 for query {$query}<br>");
+        return $this->getFirstWord("https://api.datamuse.com/words?ml={$topic}&md=p");
       }
       $result = "";
 
-      global $randomness;
-      $numSearches = rand(0, $randomness);
-      $searchCount = 0;
-
-      foreach ($json as $word) {
-        $curWord = $word["word"];
-        if(!($this->isUsed($curWord)) || $searchCount == (count($json) - 1)) {
-          $result = $curWord;
-
-          // TODO: Find a better way to do this?
-          // If randomness if 3 it only ever looks at the first 3
-          if ($searchCount == $numSearches || $searchCount == (count($json) - 1)) {
-            break;
-          } else {
-            $searchCount++;
-            continue;
-          }
-        }
-      }
-      if(strcmp($result, "") == 0) {
-        global $topic;
-        return $this->getWord("https://api.datamuse.com/words?rel_trg={$topic}&md=p");
-      }
-      $this->addUsed($result);
-      return $result;
-    }
-
-    public function getNoun($query) {
-      // Only keep first word if there are multiple
-      $pieces = explode(" ", $query);
-      $query = $pieces[0];
-
-      $resp = file_get_contents($query);
-      $json = json_decode($resp, true);
-      if (count($json) == 0) {
-        global $topic;
-        return $this->getWord("https://api.datamuse.com/words?rel_trg={$topic}&md=p");
-      }
-      $result = "";
-
-      global $randomness;
-      $numSearches = rand(0, $randomness);
+      $numSearches = 1;
       $searchCount = 0;
 
       $nouns = array();
       foreach ($json as $word) {
         if ($word["tags"] == null) {
-          return $this->getWord("https://api.datamuse.com/words?rel_trg={$topic}&md=p");
+          //print_r($word);
+          //print("Noun tags array null for query {$query}");
+          //print_r($json);
+          continue;
+          //return $this->getWord("https://api.datamuse.com/words?ml={$topic}&md=p");
         } else if (in_array("n", $word["tags"])) {
            $nouns[] = $word;
         }
       }
       if (count($nouns) == 0) {
         global $topic;
-        return $this->getWord("https://api.datamuse.com/words?rel_trg={$topic}&md=p");
+        //print("Noun count is 0");
+        return $this->getFirstWord("https://api.datamuse.com/words?ml={$topic}&md=p");
       }
       foreach ($nouns as $word) {
         $curWord = $word["word"];
@@ -119,7 +82,65 @@ require_once 'vendor/autoload.php';
       }
       if(strcmp($result, "") == 0) {
         global $topic;
-        return $this->getNoun("https://api.datamuse.com/words?rel_trg={$topic}&md=p");
+        //print("Noun no result");
+        return $this->getNoun("https://api.datamuse.com/words?ml={$topic}&md=p");
+      }
+      $this->addUsed($result);
+      return $result;
+    }
+
+    public function getNoun($query) {
+      // Only keep first word if there are multiple
+      //$pieces = explode(" ", $query);
+      //$query = $pieces[0];
+      $query .= "&md=p";
+
+      $resp = file_get_contents($query);
+      $json = json_decode($resp, true);
+      if (count($json) == 0) {
+        global $topic;
+        //print("Noun JSON count 0 for query {$query}<br>");
+        return $this->getNoun("https://api.datamuse.com/words?ml={$topic}&md=p");
+      }
+      $result = "";
+
+      global $randomness;
+      $numSearches = rand(0, $randomness);
+      $searchCount = 0;
+
+      $nouns = array();
+      foreach ($json as $word) {
+        if ($word["tags"] == null) {
+          //print_r($word);
+          //print("Noun tags array null for query {$query}");
+          //print_r($json);
+          continue;
+          //return $this->getWord("https://api.datamuse.com/words?ml={$topic}&md=p");
+        } else if (in_array("n", $word["tags"])) {
+           $nouns[] = $word;
+        }
+      }
+      if (count($nouns) == 0) {
+        global $topic;
+        //print("Noun count is 0");
+        return $this->getNoun("https://api.datamuse.com/words?ml={$topic}&md=p");
+      }
+      foreach ($nouns as $word) {
+        $curWord = $word["word"];
+        if(!($this->isUsed($curWord)) || $searchCount == (count($nouns) - 1)) {
+          $result = $curWord;
+          if ($searchCount == $numSearches || $searchCount == (count($nouns) - 1)) {
+            break;
+          } else {
+            $searchCount++;
+            continue;
+          }
+        }
+      }
+      if(strcmp($result, "") == 0) {
+        global $topic;
+        //print("Noun no result");
+        return $this->getNoun("https://api.datamuse.com/words?ml={$topic}&md=p");
       }
       $this->addUsed($result);
       return $result;
@@ -127,8 +148,9 @@ require_once 'vendor/autoload.php';
 
     public function getVerb($query) {
       // Only keep first word if there are multiple
-      $pieces = explode(" ", $query);
-      $query = $pieces[0];
+      //$pieces = explode(" ", $query);
+      //$query = $pieces[0];
+      $query .= "&md=p";
 
       $resp = file_get_contents($query);
       $json = json_decode($resp, true);
@@ -144,7 +166,12 @@ require_once 'vendor/autoload.php';
         //print_r($json);
         //echo("<br><br>");
         if ($word["tags"] == null) {
-           return "is";
+            //print_r($word);
+            //print("Verb tags array null for query {$query}");
+            //print_r($json);
+            //continue;
+           //return "is";
+           continue;
         } else if (in_array("v", $word["tags"]) || $searchCount == count($json)) {
            $verbs[] = $word;
         }
@@ -152,9 +179,10 @@ require_once 'vendor/autoload.php';
       if (count($verbs) == 0) return "is";
       foreach ($verbs as $word) {
         $curWord = $word["word"];
+        $curWord = $this->verbPresentTense($curWord);
         if(!($this->isUsed($curWord)) || $searchCount == (count($verbs) - 1)) {
           $result = $curWord;
-          $result = $this->verbPresentTense($result);
+          //$result = $this->verbPresentTense($result);
           if ($searchCount == $numSearches || $searchCount == (count($verbs) - 1)) {
             break;
           } else {
@@ -209,10 +237,12 @@ require_once 'vendor/autoload.php';
       global $usedWords;
       $retval = false;
       foreach ($usedWords as $curWord) {
+        //print("Comparing {$word} and {$curWord}");
         if (strcmp($word, $curWord) == 0) {
-          $retval = true;
+          return true;
         }
       }
+      //print("Result {$retval}");
       return $retval;
     }
   }
