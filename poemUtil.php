@@ -83,7 +83,7 @@ require_once 'vendor/autoload.php';
       if(strcmp($result, "") == 0) {
         global $topic;
         //print("Noun no result");
-        return $this->getNoun("https://api.datamuse.com/words?ml={$topic}&md=p");
+        return $this->getFirstWord("https://api.datamuse.com/words?ml={$topic}&md=p");
       }
       $this->addUsed($result);
       return $result;
