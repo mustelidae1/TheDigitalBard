@@ -53,7 +53,7 @@ require_once 'vendor/autoload.php';
 
       $nouns = array();
       foreach ($json as $word) {
-        if ($word["tags"] == null) {
+        if (!isset($word["tags"])) {
           //print_r($word);
           //print("Noun tags array null for query {$query}");
           //print_r($json);
@@ -110,7 +110,7 @@ require_once 'vendor/autoload.php';
 
       $nouns = array();
       foreach ($json as $word) {
-        if ($word["tags"] == null) {
+        if (!isset($word["tags"])) {
           //print_r($word);
           //print("Noun tags array null for query {$query}");
           //print_r($json);
@@ -165,7 +165,7 @@ require_once 'vendor/autoload.php';
       foreach ($json as $word) {
         //print_r($json);
         //echo("<br><br>");
-        if ($word["tags"] == null) {
+        if (!isset($word["tags"])) {
             //print_r($word);
             //print("Verb tags array null for query {$query}");
             //print_r($json);
